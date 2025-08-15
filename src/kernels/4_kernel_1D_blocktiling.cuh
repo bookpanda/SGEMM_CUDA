@@ -60,6 +60,7 @@ __global__ void sgemm1DBlocktiling(int M, int N, int K, float alpha,
 
     // calculate per-thread results
     for (uint dotIdx = 0; dotIdx < BK; ++dotIdx) {
+      // dotIdx goes down, resIdx goes right
       // we make the dotproduct loop the outside loop, which facilitates
       // reuse of the Bs entry, which we can cache in a tmp var.
       float tmpB = Bs[dotIdx * BN + threadCol];
