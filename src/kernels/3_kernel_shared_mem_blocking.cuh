@@ -34,6 +34,8 @@ __global__ void sgemm_shared_mem_block(int M, int N, int K, float alpha,
   float tmp = 0.0;
   for (int bkIdx = 0; bkIdx < K; bkIdx += BLOCKSIZE) {
     // Have each thread load one of the elements in A & B
+    // BLOCKSIZE * BLOCKSIZE threads will in total load one block to A & B
+
     // Make the threadCol (=threadIdx.x) the consecutive index
     // to allow global memory access coalescing
     As[threadRow * BLOCKSIZE + threadCol] = A[threadRow * K + threadCol];
