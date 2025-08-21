@@ -26,6 +26,7 @@ __global__ void sgemm_shared_mem_block(int M, int N, int K, float alpha,
   const uint threadRow = threadIdx.x / BLOCKSIZE;
 
   // advance pointers to the starting positions
+  // only change addr for current thread
   A += cRow * BLOCKSIZE * K;                    // row=cRow, col=0
   B += cCol * BLOCKSIZE;                        // row=0, col=cCol
   C += cRow * BLOCKSIZE * N + cCol * BLOCKSIZE; // row=cRow, col=cCol
